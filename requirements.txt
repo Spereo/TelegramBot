@@ -1,2 +1,2 @@
-telebot
-datetime
+pyTelegramBotAPI==4.0.1
+datetime==4.3
