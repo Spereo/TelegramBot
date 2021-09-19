@@ -1,5 +1,4 @@
 import telebot
-from telebot import types
 import datetime
 
 bot = telebot.TeleBot("1247121725:AAFECNrqKn4HrwSCGKaYqx3E-7i5Vt4WplU")
@@ -25,10 +24,10 @@ days = [
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    item1 = types.KeyboardButton('Сегодня')
-    item2 = types.KeyboardButton('Завтра')
-    item3 = types.KeyboardButton('Расписание')
+    markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
+    item1 = telebot.types.KeyboardButton('Сегодня')
+    item2 = telebot.types.KeyboardButton('Завтра')
+    item3 = telebot.types.KeyboardButton('Расписание')
     markup.row(item1, item2)
     markup.row(item3)
     bot.send_message(message.chat.id, "Привееет!\r\nЯ - твой помощник, который будет подсказывать расписание занятий. Не стесняйся писать мне, когда не знаешь, на какую пару идти 💜", reply_markup=markup)
@@ -65,23 +64,23 @@ def answer(message):
                 bot.send_message(message.chat.id, days[numberOfDay] + ", " + "{}.{}.{}".format(tomorrow.day, tomorrow.month, tomorrow.year) + lessons[numberOfDay])
 
     if msg == 'Расписание':
-        markup = types.InlineKeyboardMarkup()
-        item_0 = types.InlineKeyboardButton(text='Пн', callback_data='0')
-        item_1 = types.InlineKeyboardButton(text='Вт', callback_data='1')
-        item_2 = types.InlineKeyboardButton(text='Ср', callback_data='2')
-        item_3 = types.InlineKeyboardButton(text='Чт', callback_data='3')
-        item_4 = types.InlineKeyboardButton(text='Пт', callback_data='4')
+        markup = telebot.types.InlineKeyboardMarkup()
+        item_0 = telebot.types.InlineKeyboardButton(text='Пн', callback_data='0')
+        item_1 = telebot.types.InlineKeyboardButton(text='Вт', callback_data='1')
+        item_2 = telebot.types.InlineKeyboardButton(text='Ср', callback_data='2')
+        item_3 = telebot.types.InlineKeyboardButton(text='Чт', callback_data='3')
+        item_4 = telebot.types.InlineKeyboardButton(text='Пт', callback_data='4')
         markup.add(item_0, item_1, item_2, item_3, item_4)
         bot.send_message(message.chat.id, "Выбери день недели 💜", reply_markup=markup)
 
 @bot.callback_query_handler(func = lambda call: True)
 def answer(call):
-    markup = types.InlineKeyboardMarkup()
-    item_0 = types.InlineKeyboardButton(text='Пн', callback_data='0')
-    item_1 = types.InlineKeyboardButton(text='Вт', callback_data='1')
-    item_2 = types.InlineKeyboardButton(text='Ср', callback_data='2')
-    item_3 = types.InlineKeyboardButton(text='Чт', callback_data='3')
-    item_4 = types.InlineKeyboardButton(text='Пт', callback_data='4')
+    markup = telebot.types.InlineKeyboardMarkup()
+    item_0 = telebot.types.InlineKeyboardButton(text='Пн', callback_data='0')
+    item_1 = telebot.types.InlineKeyboardButton(text='Вт', callback_data='1')
+    item_2 = telebot.types.InlineKeyboardButton(text='Ср', callback_data='2')
+    item_3 = telebot.types.InlineKeyboardButton(text='Чт', callback_data='3')
+    item_4 = telebot.types.InlineKeyboardButton(text='Пт', callback_data='4')
     markup.add(item_0, item_1, item_2, item_3, item_4)
     call_index = int(call.data)
     editText = days[call_index] + lessons[call_index]
